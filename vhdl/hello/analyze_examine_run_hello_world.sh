@@ -1,7 +1,9 @@
 #!/bin/bash
 
 
-OPTIONS="--ieee=synopsys --workdir=work"
+#OPTIONS="--ieee=synopsys --workdir=work"
+OPTIONS=" --workdir=work"
+
 
 mkdir work
 

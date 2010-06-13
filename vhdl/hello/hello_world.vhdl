@@ -1,66 +1,73 @@
--- hello_world.vhdl  Just output to the screen
---                   This should be independent of whose VHDL you use
---                   When using some vendors GUI, you have a learning curve
---                   Using portable VHDL, it will run on all vendors
---                   with implementations conforming to IEEE Std. 1076-1993
+-- hello_world.vhdl  izlaz na ekran
+--                   primjer bi trebao biti portabilan - 
+--                   trebao bi se moci pokrenuti kod svih VHDL vendor-implementacija
+--                   koji zadovoljavaju IEEE Std. 1076-1993
 
 
-entity hello_world is  -- test bench (top level like "main")
+entity hello_world is  -- test bench (top level program kao što je "main" u C-u)
 end entity hello_world;
 
-library STD;                            -- you don't need STD, it is automatic
-library IEEE;                           -- but may need other libraries
-use IEEE.std_logic_1164.all;            -- basic logic types
-use STD.textio.all;                     -- basic I/O
+library STD;                            -- STD je inace automatic, ali neka ga
+library IEEE;                           -- standardne IEEE biblioteke
+use IEEE.std_logic_1164.all;            -- osnovni logicki tipovi
+use STD.textio.all;                     -- osnovni I/O
 
-use IEEE.std_logic_textio.all;          -- I/O for logic types
+-- I/O za logicke tipove - za ovo sam morao dati ghdl-u parametre --ieee=synopsys jer 
+-- std_logic_textio nije dio standardne IEEE implementacije nego je dodatak firme synopsys 
+-- http://www.mail-archive.com/ghdl-discuss@gna.org/msg00713.html
+-- use IEEE.std_logic_textio.all;                                                 
 
 architecture test of hello_world is 
-  -- where declarations are placed
-  subtype word_32 is std_logic_vector(31 downto 0);  -- simple name
-  signal four_32 : word_32 := x"00000004";           -- just four in hex
-  signal counter : integer := 1;                     -- initialized counter
+  -- deklaracija varijabli
+  subtype word_32 is std_logic_vector(31 downto 0);
+  -- 4 kao heksadecimalni broj
+  -- signal four_32 : word_32 := x"00000004";
+  signal counter : integer := 55;
 
-begin  -- where parallel code is placed
-  my_print : process is                  -- a process is parallel
-               variable my_line : line;  -- type 'line' comes from textio
+begin  
+  -- parallel kod se ovdje izvrsava
+  my_print : process is                  
+             -- process je  parallel
+             -- tip line dolazi iz textio
+               variable my_line : line;
              begin
 
                
                -- zaglavlje
                
                write(my_line, string'("---------------------------------------------"));
-               writeline(output, my_line);               -- write to "output"
+               writeline(output, my_line);
 
-                 
-               write(my_line, string'("Hello World from FreeHDL"));   -- formatting
-               writeline(output, my_line);               -- write to "output"
+               write(my_line, string'("Hello World from FreeHDL"));
+               writeline(output, my_line);
 
                write(my_line, string'("---------------------------------------------"));
-               writeline(output, my_line);               -- write to "output"
+               writeline(output, my_line);
 
 
 
                -- linija 4
-               write(my_line, string'("four_32 = "));    -- formatting 
+               -- write(my_line, string'("four_32 = "));
+
                -- format type std_logic_vector as hex
-               hwrite(my_line, four_32); 
-               write(my_line, string'("  counter= "));
-               write(my_line, counter);  -- format 'counter' as integer
+               -- hwrite(my_line, four_32)
+
+               write(my_line, string'("counter= "));
+               -- format counter kao integer varijablu
+               write(my_line, counter);
                writeline(output, my_line);
 
                -- linija 5 - vrijeme
                write(my_line, string'("trenutno vrijeme "));
-               write(my_line, now);                     -- format time
-               writeline(output, my_line);              -- write to display
+               write(my_line, now);
+               writeline(output, my_line);
 
                wait for 10 ns;
 
                -- linija 6 - vrijeme nakon 10 ns
                write(my_line, string'("vrijeme nakon wait-a "));
-               write(my_line, now);                     -- format time
-               writeline(output, my_line);              -- write to display
-
+               write(my_line, now);
+               writeline(output, my_line);
 
 
                wait;
