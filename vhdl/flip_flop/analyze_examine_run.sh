@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OPTIONS=" --workdir=work"
+OPTIONS="  --ieee=synopsys --workdir=work"
 
 mkdir work
 
