@@ -26,7 +26,7 @@ $CMD
 
 
 
-CMD="ghdl -r $OPTIONS or_test --vcd=flip_fop.vcd"
+CMD="ghdl -r $OPTIONS flip_flop --vcd=flip_fop.vcd"
 
 echo 3. run - vcd output: $CMD
 

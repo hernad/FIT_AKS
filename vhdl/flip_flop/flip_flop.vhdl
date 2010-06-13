@@ -40,15 +40,15 @@ begin
             
             -- spoji signale q i x1
             x1 <= q;
-            -- spoji signale q_inv i x0
-            y0 <=  q_inv;
+            -- spoji signale q_invert i x0
+            y0 <=  q_invert;
 
             wait for 1 ns;
 
-            assert F = patterns(i).q
+            assert q = patterns(i).q
                report "bad q value" severity error;
 
-            assert q_inv = not patterns(i).q
+            assert q_invert = not patterns(i).q
                report "bad q_inv value" severity error;
 
 
