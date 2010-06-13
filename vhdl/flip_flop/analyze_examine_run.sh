@@ -6,7 +6,7 @@ mkdir work
 
 
 
-CMD="ghdl -a $OPTIONS xor_gate.vhdl"
+CMD="ghdl -a $OPTIONS nor_gate.vhdl"
 
 echo 1. analize: $CMD
 $CMD
@@ -26,7 +26,7 @@ $CMD
 
 
 
-CMD="ghdl -r $OPTIONS flip_flop --vcd=flip_fop.vcd"
+CMD="ghdl -r $OPTIONS flip_flop --vcd=flip_flop.vcd"
 
 echo 3. run - vcd output: $CMD
 
